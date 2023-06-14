@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using WEBAPIFLUENT.Context;
 using WEBAPIFLUENT.Repository;
 
@@ -9,6 +10,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//builder.Services.AddDbContext<PDFContext>(
+//    options =>
+//    {
+//        options.UseMySQL(builder.Configuration.GetSection("ConnectionStrings")["Default"]);
+//    });
+
 builder.Services.AddScoped<PDFContext>();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
 

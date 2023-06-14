@@ -77,3 +77,10 @@ D:\React\WEBAPIFLUENT\WEBAPIFLUENT\obj\Debug\net6.0\refint\WEBAPIFLUENT.dll
 D:\React\WEBAPIFLUENT\WEBAPIFLUENT\obj\Debug\net6.0\WEBAPIFLUENT.pdb
 D:\React\WEBAPIFLUENT\WEBAPIFLUENT\obj\Debug\net6.0\WEBAPIFLUENT.genruntimeconfig.cache
 D:\React\WEBAPIFLUENT\WEBAPIFLUENT\obj\Debug\net6.0\ref\WEBAPIFLUENT.dll
+D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\AutoMapper.dll
+D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Json.dll
+D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Physical.dll
+D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll

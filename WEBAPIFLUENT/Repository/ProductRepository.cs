@@ -12,13 +12,16 @@ namespace WEBAPIFLUENT.Repository
     public class ProductRepository:IProductRepository
     {
         private readonly PDFContext _context;
+       
         public ProductRepository(PDFContext context)
         {
             _context = context;
         }
         public async Task<int> AddProduct(ProductDTO product)
         {
-            var result=await _context.AddAsync<Product>(product);
+            var mapper = MapperConfig.InitializeAutomapper();
+            var prod=mapper.Map<Product>(product);
+            var result=await _context.AddAsync<Product>(prod);
             await _context.SaveChangesAsync();
             return result.Entity.Id;
         }

@@ -5,8 +5,18 @@ namespace WEBAPIFLUENT.Context
 {
     public class PDFContext:DbContext
     {
+        IConfiguration _config { get; set; }
+        //public PDFContext(DbContextOptions<PDFContext> options, IConfiguration config) : base(options)
+        //{
+        //    _config = config;   
+        //}
+        public PDFContext( IConfiguration config) 
+        {
+            _config = config;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            string conection = _config["vamsi"];
             optionsBuilder.UseMySQL("Server=localhost;Database=PDF;Uid=root;Pwd=Analinear;");
         }
 

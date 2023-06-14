@@ -35,8 +35,15 @@ namespace WEBAPIFLUENT.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ProductDTO product)
         {
-            var result = await _repo.AddProduct(product);
-            return Ok(result);
+            try
+            {
+                var result = await _repo.AddProduct(product);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<ProductController>/5
