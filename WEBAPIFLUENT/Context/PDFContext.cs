@@ -10,13 +10,23 @@ namespace WEBAPIFLUENT.Context
         //{
         //    _config = config;   
         //}
+        public DbSet<Product> products { get; set; }
+        public DbSet<Varient> varients { get; set; }
+        public DbSet<Board> boards { get; set; }
+        public DbSet<Rivision> rivisions { get; set; }
+        public DbSet<Identity> identity { get; set; }
+        public DbSet<BareBoardDetails> bareboards { get; set; }
+        public DbSet<AssembledBoardDetails> assembledBoards { get; set; }
+        public DbSet<Heading> headings { get; set; }
+        public DbSet<SubHeading> subheading { get; set; }
         public PDFContext( IConfiguration config) 
         {
             _config = config;
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string conection = _config["vamsi"];
+            //string conection = _config["vamsi"];
             optionsBuilder.UseMySQL("Server=localhost;Database=PDF;Uid=root;Pwd=Analinear;");
         }
 
@@ -33,7 +43,8 @@ namespace WEBAPIFLUENT.Context
             modelBuilder.Entity<Varient>()
                 .Property(p => p.Id)
                 .HasColumnType("bigint")
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd()
+                .IsRequired();
             modelBuilder.Entity<Varient>()
                 .Property(v => v.PId)
                 .HasColumnType("bigint");
@@ -70,6 +81,26 @@ namespace WEBAPIFLUENT.Context
             modelBuilder.Entity<BareBoardDetails>()
                 .Property(b => b.IId)
                 .HasColumnType("bigint");
+            modelBuilder.Entity<AssembledBoardDetails>()
+                .Property(ab => ab.Id)
+                .HasColumnType("bigint");
+            modelBuilder.Entity<AssembledBoardDetails>()
+                .Property(ab => ab.IId)
+                .HasColumnType("bigint");
+
+            modelBuilder.Entity<Heading>()
+                .Property(ab => ab.Id)
+                .HasColumnType("bigint");
+            modelBuilder.Entity<Heading>()
+                .Property(ab => ab.IId)
+                .HasColumnType("bigint");
+            modelBuilder.Entity<SubHeading>()
+                .Property(ab => ab.Id)
+                .HasColumnType("bigint");
+            modelBuilder.Entity<SubHeading>()
+                .Property(ab => ab.HId)
+                .HasColumnType("bigint");
+
 
             #endregion
 
@@ -100,9 +131,21 @@ namespace WEBAPIFLUENT.Context
                 .HasMany<BareBoardDetails>(i => i.BareBoardDetails)
                 .WithOne(b => b.Identity)
                 .HasForeignKey(b => b.IId);
+            modelBuilder.Entity<Identity>()
+                .HasMany<AssembledBoardDetails>(i => i.AssembledBoardDetails)
+                .WithOne(ab => ab.Identity)
+                .HasForeignKey(ab => ab.IId);
+            modelBuilder.Entity<Identity>()
+                .HasMany<Heading>(i =>i.headings)
+                .WithOne(ab => ab.Identity)
+                .HasForeignKey(ab => ab.IId);
+            modelBuilder.Entity<Heading>()
+                .HasMany<SubHeading>(h => h.SubHeading)
+                .WithOne(sh => sh.Heading)
+                .HasForeignKey(sh => sh.HId);
             #endregion
 
         }
-
+        
     }
 }

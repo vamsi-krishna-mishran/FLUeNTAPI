@@ -18,17 +18,31 @@ namespace WEBAPIFLUENT.Controllers
         }
         
         // GET: api/<ProductController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var result=await _repo.GetProduct(id); return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET api/<ProductController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        public async Task<IActionResult> Get([FromBody] List<int>ids)
         {
-            return "value";
+            try
+            {
+                var res=await _repo.GetProducts(ids); return Ok(res);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500,ex.Message);
+            }
         }
 
         // POST api/<ProductController>
@@ -45,6 +59,19 @@ namespace WEBAPIFLUENT.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost("addproducts")]
+        public async Task<IActionResult> Post([FromBody]List<ProductDTO> ids)
+        {
+            try
+            {
+                var result = await _repo.AddProducts(ids);
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         // PUT api/<ProductController>/5
         [HttpPut("{id}")]
@@ -54,8 +81,30 @@ namespace WEBAPIFLUENT.Controllers
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var res = await _repo.DeleteProduct(id);
+                return Ok(res);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500,ex.Message);
+            }
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] List<int> ids)
+        {
+            try
+            {
+                var res = await _repo.DeleteProducts(ids);
+                return Ok(res);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500,ex.Message);
+            }
         }
     }
 }

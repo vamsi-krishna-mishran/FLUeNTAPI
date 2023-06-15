@@ -18,7 +18,7 @@ namespace WEBAPIFLUENT.Migrations
                 .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("WEBAPIFLUENT.Models.BareBoardDetails", b =>
+            modelBuilder.Entity("WEBAPIFLUENT.Models.AssembledBoardDetails", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -26,6 +26,40 @@ namespace WEBAPIFLUENT.Migrations
 
                     b.Property<long>("IId")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("Remark")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IId");
+
+                    b.ToTable("assembledBoards");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.BareBoardDetails", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("IId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ImageName")
                         .IsRequired()
@@ -35,7 +69,7 @@ namespace WEBAPIFLUENT.Migrations
 
                     b.HasIndex("IId");
 
-                    b.ToTable("BareBoardDetails");
+                    b.ToTable("bareboards");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Board", b =>
@@ -59,7 +93,31 @@ namespace WEBAPIFLUENT.Migrations
 
                     b.HasIndex("VId");
 
-                    b.ToTable("Board");
+                    b.ToTable("boards");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.Heading", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("IId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IId");
+
+                    b.ToTable("headings");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Identity", b =>
@@ -79,7 +137,7 @@ namespace WEBAPIFLUENT.Migrations
 
                     b.HasIndex("RId");
 
-                    b.ToTable("Identity");
+                    b.ToTable("identity");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Product", b =>
@@ -98,7 +156,7 @@ namespace WEBAPIFLUENT.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("products");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Rivision", b =>
@@ -122,7 +180,31 @@ namespace WEBAPIFLUENT.Migrations
 
                     b.HasIndex("BId");
 
-                    b.ToTable("Rivision");
+                    b.ToTable("rivisions");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.SubHeading", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("HId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HId");
+
+                    b.ToTable("subheading");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Varient", b =>
@@ -146,7 +228,18 @@ namespace WEBAPIFLUENT.Migrations
 
                     b.HasIndex("PId");
 
-                    b.ToTable("Varient");
+                    b.ToTable("varients");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.AssembledBoardDetails", b =>
+                {
+                    b.HasOne("WEBAPIFLUENT.Models.Identity", "Identity")
+                        .WithMany("AssembledBoardDetails")
+                        .HasForeignKey("IId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Identity");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.BareBoardDetails", b =>
@@ -171,6 +264,17 @@ namespace WEBAPIFLUENT.Migrations
                     b.Navigation("Varient");
                 });
 
+            modelBuilder.Entity("WEBAPIFLUENT.Models.Heading", b =>
+                {
+                    b.HasOne("WEBAPIFLUENT.Models.Identity", "Identity")
+                        .WithMany("headings")
+                        .HasForeignKey("IId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Identity");
+                });
+
             modelBuilder.Entity("WEBAPIFLUENT.Models.Identity", b =>
                 {
                     b.HasOne("WEBAPIFLUENT.Models.Rivision", "Rivision")
@@ -193,6 +297,17 @@ namespace WEBAPIFLUENT.Migrations
                     b.Navigation("Board");
                 });
 
+            modelBuilder.Entity("WEBAPIFLUENT.Models.SubHeading", b =>
+                {
+                    b.HasOne("WEBAPIFLUENT.Models.Heading", "Heading")
+                        .WithMany("SubHeading")
+                        .HasForeignKey("HId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Heading");
+                });
+
             modelBuilder.Entity("WEBAPIFLUENT.Models.Varient", b =>
                 {
                     b.HasOne("WEBAPIFLUENT.Models.Product", "Product")
@@ -209,9 +324,18 @@ namespace WEBAPIFLUENT.Migrations
                     b.Navigation("Rivisions");
                 });
 
+            modelBuilder.Entity("WEBAPIFLUENT.Models.Heading", b =>
+                {
+                    b.Navigation("SubHeading");
+                });
+
             modelBuilder.Entity("WEBAPIFLUENT.Models.Identity", b =>
                 {
+                    b.Navigation("AssembledBoardDetails");
+
                     b.Navigation("BareBoardDetails");
+
+                    b.Navigation("headings");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Product", b =>

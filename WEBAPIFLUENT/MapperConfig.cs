@@ -6,6 +6,7 @@ namespace WEBAPIFLUENT
 {
     public class MapperConfig
     {
+       
         public static Mapper InitializeAutomapper()
         {
             //Provide all the Mapping Configuration
@@ -17,7 +18,15 @@ namespace WEBAPIFLUENT
                 //.ForMember(p => p.Description, act => act.MapFrom(dto => dto.Description))
                 //.ForMember(p=>p.Name,act=>act.MapFrom(dto=>dto.Name))
                 .ReverseMap();
-                
+                cfg.CreateMap<Varient, VarientDTO>()
+                .ReverseMap();
+                cfg.CreateMap<Board, BoardDTO>().ReverseMap();
+                cfg.CreateMap<Rivision, RivisionDTO>().ReverseMap();
+                cfg.CreateMap<Identity, IdentityDTO>().ReverseMap();
+                cfg.CreateMap<BareBoardDetails,BareBoardDTO>().ReverseMap();
+                cfg.CreateMap<AssembledBoardDetails, AssembledBoardDTO>().ReverseMap();
+                cfg.CreateMap<Heading, HeadingDTO>().ReverseMap();
+                cfg.CreateMap<SubHeading, SubHeadingDTO>().ReverseMap();
                 //Any Other Mapping Configuration ....
             });
             //Create an Instance of Mapper and return that Instance
