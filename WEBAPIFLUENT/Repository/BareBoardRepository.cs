@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WEBAPIFLUENT.Context;
 using WEBAPIFLUENT.DTOs;
+using WEBAPIFLUENT.Enums;
 using WEBAPIFLUENT.Models;
 
 namespace WEBAPIFLUENT.Repository
@@ -10,7 +11,7 @@ namespace WEBAPIFLUENT.Repository
     {
         public Task<int?> Add(BareBoardDTO bbd);
         public Task<int?> AddRange(List<BareBoardDTO> bbd);
-        public Task<BareBoardDTO?> Get(int id);
+        public Task<BareBoardDTO?> Get(int id,BoardType boardType);
         public Task<List<BareBoardDTO?>?> GetSome(List<int> ids);
         public Task<List<BareBoardDTO?>?> GetAll(int IId);
         public Task<int?> Delete(int Id);
@@ -28,10 +29,23 @@ namespace WEBAPIFLUENT.Repository
         {
             var mapper=MapperConfig.InitializeAutomapper();
             var bb=mapper.Map<BareBoardDetails>(bbd);
-            var res=await _context.bareboards.AddAsync(bb);
-            await _context.SaveChangesAsync();
+            var boardIfalreadyExist=await _context.bareboards.Where(board=>board.IId==bbd.IId && board.BoardType==bbd.BoardType).FirstOrDefaultAsync();
+            if (boardIfalreadyExist == null)
+            {
+                var res = await _context.bareboards.AddAsync(bb);
+                await _context.SaveChangesAsync();
 
-            return res.Entity.Id;
+                return res.Entity.Id;
+            }
+            else
+            {
+                boardIfalreadyExist.ImageData = bbd.ImageData;
+                boardIfalreadyExist.ImageName = bbd.ImageName;
+                boardIfalreadyExist.Description = bbd.Description;
+                await _context.SaveChangesAsync();
+                return boardIfalreadyExist.Id;
+            }
+           
         }
         public async Task<int?> AddRange(List<BareBoardDTO> bbd)
         {
@@ -41,10 +55,10 @@ namespace WEBAPIFLUENT.Repository
             await _context.SaveChangesAsync();
             return bb.Count;
         }
-        public async Task<BareBoardDTO?> Get(int id)
+        public async Task<BareBoardDTO?> Get(int id,BoardType boardType)
         {
             var mapper = MapperConfig.InitializeAutomapper();
-            var res =await  _context.bareboards.FindAsync(id);
+            var res =await  _context.bareboards.Where(b=>b.IId==id &&b.BoardType==boardType).FirstOrDefaultAsync();
             return mapper.Map<BareBoardDTO>(res);
         }
         public async Task<List<BareBoardDTO?>?> GetSome(List<int> ids)

@@ -27,6 +27,11 @@ namespace WEBAPIFLUENT
                 cfg.CreateMap<AssembledBoardDetails, AssembledBoardDTO>().ReverseMap();
                 cfg.CreateMap<Heading, HeadingDTO>().ReverseMap();
                 cfg.CreateMap<SubHeading, SubHeadingDTO>().ReverseMap();
+                cfg.CreateMap<User, UserDTO>().ReverseMap();
+                cfg.CreateMap<PowerUpTest, PowerUpDTO>().ReverseMap();  
+                cfg.CreateMap<SubHeadingImages, SubHeadingImagesDTO>().ReverseMap();
+                cfg.CreateMap<XLSheet, XLSheetDTO>().ReverseMap();
+                cfg.CreateMap<XLTamplate,XLTemplateDTO>().ReverseMap();
                 //Any Other Mapping Configuration ....
             });
             //Create an Instance of Mapper and return that Instance

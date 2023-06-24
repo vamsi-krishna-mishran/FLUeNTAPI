@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/wEet8HDQkKOD4JJK0XflgAAAAACAAAAAAAQZgAAAAEAACAAAACNpuGoeOVD82iLWgqkSO6jcUOXwn3OMli7y9+yyj6M1wAAAAAOgAAAAAIAACAAAAAHP9iISirYZd5r+25DH8oBIlU/5ZJcb+flTiddJc7YTYAAAAC5ih8Ddj7dy09iHTj/ftHgde+AjHAtTUBRIr69fxt9JdAwD3E424CWkc5cSctJGs+s5S3MjzD6hAfmhVsXLuVo4zjMpyn2mTc73F2wUayOviLkb4SrnzdmKORDQ92mSb1OAIJ5ldK6eQDjKBLfle/AMNJ36+Y1HX7PQncy6m+xzkAAAABG+UgVrivVaYk95GEr7mjcBbu0JLR3ldsHc6RHYMDgHe3JeHxxWhFGt4uRLXtdc2dkrfUpfMyh7sd4wQ1va0DY</EncryptedPassword>
+    <History>False|2023-06-24T13:53:15.5211505Z;True|2023-06-24T19:22:12.1565916+05:30;False|2023-06-24T19:17:28.3330499+05:30;False|2023-06-24T19:14:38.7837514+05:30;True|2023-06-24T19:13:34.2240712+05:30;True|2023-06-24T18:40:21.1203935+05:30;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="WEBAPIFLUENT.Context.PDFContext">
+      <Value>
+      </Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

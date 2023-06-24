@@ -12,6 +12,8 @@
         public ICollection<AssembledBoardDetails> AssembledBoardDetails { get;set;}
         public ICollection<Heading> headings { get; set;}
 
+        public ICollection<PowerUpTest> PowerUpTest { get; set;}
+
 
     }
 }

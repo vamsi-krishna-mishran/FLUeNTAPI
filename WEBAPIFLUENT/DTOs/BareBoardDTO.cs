@@ -1,4 +1,6 @@
-﻿namespace WEBAPIFLUENT.DTOs
+﻿using WEBAPIFLUENT.Enums;
+
+namespace WEBAPIFLUENT.DTOs
 {
     public class BareBoardDTO
     {
@@ -6,6 +8,7 @@
         public string ImageName { get; set; }
         public string Description { get; set; }
         public string ImageData { get; set; }
+        public BoardType BoardType { get; set; }
 
         public int IId { get; set; }
 

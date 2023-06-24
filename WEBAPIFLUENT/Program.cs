@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.OpenApi.Models;
 using WEBAPIFLUENT.Context;
 using WEBAPIFLUENT.Repository;
 
@@ -10,6 +12,7 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 //builder.Services.AddDbContext<PDFContext>(
 //    options =>
 //    {
@@ -19,17 +22,35 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<PDFContext>();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
 builder.Services.AddScoped<IVarientRepository, VarientRepository>();
-
+builder.Services.AddScoped<IBareBoardRepository, BareBoardRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAssembledBoardRepository, AssembledBoardRepository>();
+builder.Services.AddScoped<IPowerUpRepository, PowerUpRepository>();
+builder.Services.AddScoped<IHeadingRepository, HeadingRepository>();
+builder.Services.AddScoped<ISubHeadingRepository,SubHeadingRepository>();
+builder.Services.AddScoped<ISubHeadingImagesRepository, SubHeadingImagesRepository>();
+builder.Services.AddScoped<IXLSheetRepository, XLSheetRepository>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(cookie =>
+    {
+        cookie.LoginPath = "/api/User/Login";
+        cookie.AccessDeniedPath = "/api/User/AccessDenied";
+        cookie.LogoutPath = "/api/User/Logout";
+        cookie.ExpireTimeSpan = TimeSpan.FromMinutes(120);
+        
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

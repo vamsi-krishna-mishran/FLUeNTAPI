@@ -27,8 +27,9 @@ namespace WEBAPIFLUENT.Migrations
                     b.Property<long>("IId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Remark")
-                        .HasColumnType("int");
+                    b.Property<string>("Remark")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -49,6 +50,11 @@ namespace WEBAPIFLUENT.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
+
+                    b.Property<int>("BoardType")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -113,6 +119,10 @@ namespace WEBAPIFLUENT.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Remark")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IId");
@@ -138,6 +148,38 @@ namespace WEBAPIFLUENT.Migrations
                     b.HasIndex("RId");
 
                     b.ToTable("identity");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.PowerUpTest", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Exp")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("IId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Mes")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PUT")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Ref")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IId");
+
+                    b.ToTable("poweruptests");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Product", b =>
@@ -200,11 +242,68 @@ namespace WEBAPIFLUENT.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Remark")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.HasIndex("HId");
 
                     b.ToTable("subheading");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.SubHeadingImages", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("SHId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SHId");
+
+                    b.ToTable("subheadingimages");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.User", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Varient", b =>
@@ -229,6 +328,58 @@ namespace WEBAPIFLUENT.Migrations
                     b.HasIndex("PId");
 
                     b.ToTable("varients");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.XLSheet", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Col1")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Col2")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Col3")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Col4")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("XId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("XId");
+
+                    b.ToTable("xLSheets");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.XLTamplate", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("SHId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SHId");
+
+                    b.ToTable("xLTamplates");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.AssembledBoardDetails", b =>
@@ -286,6 +437,17 @@ namespace WEBAPIFLUENT.Migrations
                     b.Navigation("Rivision");
                 });
 
+            modelBuilder.Entity("WEBAPIFLUENT.Models.PowerUpTest", b =>
+                {
+                    b.HasOne("WEBAPIFLUENT.Models.Identity", "Identity")
+                        .WithMany("PowerUpTest")
+                        .HasForeignKey("IId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Identity");
+                });
+
             modelBuilder.Entity("WEBAPIFLUENT.Models.Rivision", b =>
                 {
                     b.HasOne("WEBAPIFLUENT.Models.Board", "Board")
@@ -308,6 +470,17 @@ namespace WEBAPIFLUENT.Migrations
                     b.Navigation("Heading");
                 });
 
+            modelBuilder.Entity("WEBAPIFLUENT.Models.SubHeadingImages", b =>
+                {
+                    b.HasOne("WEBAPIFLUENT.Models.SubHeading", "subHeading")
+                        .WithMany("SubHeadingImages")
+                        .HasForeignKey("SHId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("subHeading");
+                });
+
             modelBuilder.Entity("WEBAPIFLUENT.Models.Varient", b =>
                 {
                     b.HasOne("WEBAPIFLUENT.Models.Product", "Product")
@@ -317,6 +490,28 @@ namespace WEBAPIFLUENT.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.XLSheet", b =>
+                {
+                    b.HasOne("WEBAPIFLUENT.Models.XLTamplate", "XLTamplate")
+                        .WithMany("Sheets")
+                        .HasForeignKey("XId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("XLTamplate");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.XLTamplate", b =>
+                {
+                    b.HasOne("WEBAPIFLUENT.Models.SubHeading", "SubHeading")
+                        .WithMany("XLTamplate")
+                        .HasForeignKey("SHId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubHeading");
                 });
 
             modelBuilder.Entity("WEBAPIFLUENT.Models.Board", b =>
@@ -335,6 +530,8 @@ namespace WEBAPIFLUENT.Migrations
 
                     b.Navigation("BareBoardDetails");
 
+                    b.Navigation("PowerUpTest");
+
                     b.Navigation("headings");
                 });
 
@@ -348,9 +545,21 @@ namespace WEBAPIFLUENT.Migrations
                     b.Navigation("Identity");
                 });
 
+            modelBuilder.Entity("WEBAPIFLUENT.Models.SubHeading", b =>
+                {
+                    b.Navigation("SubHeadingImages");
+
+                    b.Navigation("XLTamplate");
+                });
+
             modelBuilder.Entity("WEBAPIFLUENT.Models.Varient", b =>
                 {
                     b.Navigation("Boards");
+                });
+
+            modelBuilder.Entity("WEBAPIFLUENT.Models.XLTamplate", b =>
+                {
+                    b.Navigation("Sheets");
                 });
 #pragma warning restore 612, 618
         }

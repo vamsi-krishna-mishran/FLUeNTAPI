@@ -1,0 +1,19 @@
+# Ignore environment-specific configuration files
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+
+# Ignore Visual Studio files
+.vs/
+obj/
+bin/
+*.suo
+*.user
+*.vscode
+
+# Ignore NuGet packages
+/packages/
+
+# Ignore build output
+/bin/
+/obj/

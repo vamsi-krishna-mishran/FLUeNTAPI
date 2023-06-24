@@ -301,3 +301,4 @@ D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\runtimes\unix\lib\net6.0\Sys
 D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\React\WEBAPIFLUENT\WEBAPIFLUENT\bin\Debug\net6.0\appsettings.Production.json
