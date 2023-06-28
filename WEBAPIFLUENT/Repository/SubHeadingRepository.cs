@@ -48,6 +48,7 @@ namespace WEBAPIFLUENT.Repository
         {
             var mapper = MapperConfig.InitializeAutomapper();
             var res = await _context.subheading.Where(h => h.HId == HId).ToListAsync();
+            if(res.Count == 0) return null;
             return mapper.Map<List<SubHeadingDTO?>?>(res);
         }
         public async Task<int?> Delete(int id)

@@ -56,6 +56,7 @@ namespace WEBAPIFLUENT.Repository
         {
             var mapper = MapperConfig.InitializeAutomapper();
             var res = await _context.assembledBoards.Where(bb => bb.IId == IId).ToListAsync();
+            if (res.Count == 0) return null;
             return mapper.Map<List<AssembledBoardDTO?>?>(res);
         }
         public async Task<int?> Delete(int Id)

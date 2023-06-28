@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="D:\React\WEBAPIFLUENT\WEBAPIFLUENT\obj\Release\net6.0\PubTmp\Out\" />
-  <dbfullsql path="D:\React\WEBAPIFLUENT\WEBAPIFLUENT\obj\Release\net6.0\PubTmp\EFSQLScripts\WEBAPIFLUENT.Context.PDFContext.sql" />
+  <IisApp path="D:\FLUeNTAPI\WEBAPIFLUENT\obj\Release\net6.0\PubTmp\Out\" />
 </sitemanifest>

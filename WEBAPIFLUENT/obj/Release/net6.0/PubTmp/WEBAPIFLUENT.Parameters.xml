@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="WEBAPIFLUENT" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\React\\WEBAPIFLUENT\\WEBAPIFLUENT\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
-  </parameter>
-  <parameter name="WEBAPIFLUENT.Context.PDFContext" description="" value="" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\React\\WEBAPIFLUENT\\WEBAPIFLUENT\\obj\\Release\\net6\.0\\PubTmp\\EFSQLScripts\\WEBAPIFLUENT\.Context\.PDFContext\.sql$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\FLUeNTAPI\\WEBAPIFLUENT\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
   </parameter>
 </parameters>

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using WEBAPIFLUENT.Context;
 using WEBAPIFLUENT.Repository;
@@ -40,11 +41,24 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         
     });
 var app = builder.Build();
-
+//Migrate the database on application startup
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<PDFContext>();
+    try
+    {
+        dbContext.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        // Handle any migration error here
+        Console.WriteLine($"An error occurred while migrating the database: {ex.Message}");
+    }
+}
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI();
 //}
 

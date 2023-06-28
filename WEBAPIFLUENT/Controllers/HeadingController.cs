@@ -32,6 +32,9 @@ namespace WEBAPIFLUENT.Controllers
         {
             try
             {
+                if(h.Description == null) { h.Description = "TEMp"; }
+                if(h.Remark==null) { h.Remark = "TEMP"; }
+                
                 var res=await _repo.Add(h);
                 return Ok(res);
             }

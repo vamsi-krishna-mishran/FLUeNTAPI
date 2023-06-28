@@ -65,12 +65,14 @@ namespace WEBAPIFLUENT.Repository
         {
             var mapper=MapperConfig.InitializeAutomapper();
             var res =await  _context.bareboards.Where(bb => ids.Contains(bb.Id)).ToListAsync();
+            if (res.Count == 0) return null;
             return mapper.Map<List<BareBoardDTO?>?>(res);
         }
         public async Task<List<BareBoardDTO?>?> GetAll(int IId)
         {
             var mapper = MapperConfig.InitializeAutomapper();
             var res = await _context.bareboards.Where(bb => bb.IId==IId).ToListAsync();
+            if (res.Count == 0) return null;
             return mapper.Map<List<BareBoardDTO?>?>(res);
         }
         public async Task<int?> Delete(int Id)
